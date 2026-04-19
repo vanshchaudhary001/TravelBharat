@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <!-- Tells Tomcat it is running behind Render's HTTPS load balancer -->
+    <Valve className="org.apache.catalina.valves.RemoteIpValve"
+           remoteIpHeader="x-forwarded-for"
+           protocolHeader="x-forwarded-proto" />
+</Context>

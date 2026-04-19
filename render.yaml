@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: travel-bharat
+    env: docker
+    plan: free

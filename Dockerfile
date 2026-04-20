@@ -20,7 +20,14 @@ RUN rm -rf webapps/ROOT
 # This ensures your app is accessible at the root URL (e.g., your-app.onrender.com/)
 COPY --from=build /app/target/TravelPlanner.war webapps/ROOT.war
 
-# Expose the default Tomcat port
+# Render dynamically assigns PORT; configure Tomcat to use it
+# Default to 8080 if PORT is not set
+ENV PORT=8080
+
+# Patch Tomcat's server.xml to listen on $PORT at startup
+RUN sed -i 's/port="8080"/port="${PORT}"/g' conf/server.xml
+
+# Expose the port (Render reads this)
 EXPOSE 8080
 
 # Start Tomcat
